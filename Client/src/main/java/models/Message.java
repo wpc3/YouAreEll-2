@@ -23,6 +23,16 @@ public class Message implements Comparable<Message> {
     private String timestamp = "";
     private String sequence = "";
 
+    public Message() {
+    }
+    public Message (String message, String fromId, String toId, String timestamp, String sequence) {
+        this.message = message;
+        this.fromid = fromId;
+        this.toid = toId;
+        this.timestamp = timestamp;
+        this.sequence = sequence;
+    }
+    
     public Message (String message, String fromId, String toId) {
         this.message = message;
         this.fromid = fromId;

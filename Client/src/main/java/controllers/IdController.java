@@ -33,9 +33,9 @@ public class IdController {
             // return array of Ids
             return idList;
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            System.out.println("Error processing JSON from response: " + e.getMessage());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            System.out.println("Error processing JSON from response: " + e.getMessage());
         }
         return null;
     }

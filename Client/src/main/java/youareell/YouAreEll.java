@@ -32,7 +32,12 @@ public class YouAreEll {
     }
 
     public String get_messages() {
-        return "Not Implemented";
+        List<models.Message> latestMessages = tt.getMessages();
+        StringBuilder sb = new StringBuilder();
+        for (models.Message msg : latestMessages) {
+            sb.append(msg.toString()+"\n");
+        }
+        return sb.toString();
     }
 
 
