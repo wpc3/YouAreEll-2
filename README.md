@@ -7,6 +7,12 @@ You'll write a Client to exchange JSON data over HTTP with a Server, in this cas
 (or if you are like me, you can use the Milkman.app, which is a little more lightweight and less intrusive)
 Get it at `brew install --cask milkman`
 
+You really __really__ need to understand the HTTP protocol and the REST API. 
+And you need to understand JSON.
+And youneed to use Milkman or Postman to test your API calls, otherwise, you're just guessing. 
+And the POST methods are the hardest to get right. 
+They are kinda tricky about what you put in the body of the POST request.
+
 a little article on [ModelViewController](https://www.geeksforgeeks.org/mvc-design-pattern/)
 
 #### Breaking News in 2024
