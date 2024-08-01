@@ -1,5 +1,9 @@
 package youareell;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import controllers.*;
 
 public class YouAreEll {
@@ -13,12 +17,18 @@ public class YouAreEll {
         // hmm: is this Dependency Injection?
         YouAreEll urlhandler = new YouAreEll(
             new TransactionController(
-                new MessageController(), new IdController()
+                new MessageController(ServerController.shared()), 
+                new IdController(ServerController.shared())
         ));
     }
 
     public String get_ids() {
-        return "Not Implemented";
+        List<models.Id> allIds = tt.getIds();
+        StringBuilder sb = new StringBuilder();
+        for (models.Id id : allIds) {
+            sb.append(id.toString()+"\n");
+        }
+        return sb.toString();
     }
 
     public String get_messages() {

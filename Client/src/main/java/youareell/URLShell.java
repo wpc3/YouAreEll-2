@@ -9,22 +9,24 @@ import java.util.List;
 
 import controllers.IdController;
 import controllers.MessageController;
+import controllers.ServerController;
 import controllers.TransactionController;
 
 // URLShell is a Console view for youareell.YouAreEll.
 public class URLShell {
-
-
     public static void prettyPrint(String output) {
         // yep, make an effort to format things nicely, eh?
         System.out.println(output);
     }
+
+
     public static void main(String[] args) throws java.io.IOException {
         new URLShell().run();
     }
 
     public void run() throws IOException {
-        YouAreEll urll = new YouAreEll(new TransactionController(new MessageController(), new IdController()));
+        YouAreEll urll = new YouAreEll(new TransactionController(new MessageController(ServerController.shared()), 
+        new IdController(ServerController.shared())));
         
         String commandLine;
         BufferedReader console = new BufferedReader

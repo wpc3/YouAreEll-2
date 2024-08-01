@@ -7,10 +7,15 @@ import models.Id;
 import models.Message;
 
 public class MessageController {
+    ServerController sc;
 
     private HashSet<Message> messagesSeen;
     // why a HashSet??
 
+    public MessageController(ServerController shared) {
+        sc = shared;
+        messagesSeen = new HashSet<Message>();
+    }
     public ArrayList<Message> getMessages() {
         return null;
     }

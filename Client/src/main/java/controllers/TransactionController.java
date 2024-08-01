@@ -18,6 +18,7 @@ public class TransactionController {
     public List<Id> getIds() {
         return idCtrl.getIds();
     }
+
     public String getId(String id) {
         return null;
     }
@@ -30,9 +31,10 @@ public class TransactionController {
     }
 
     public String postId(String idtoRegister, String githubName) {
-        Id tid = new Id(idtoRegister, githubName);
-        tid = idCtrl.postId(tid);
-        return ("Id registered.");
+        // Id tid = new Id(idtoRegister, githubName);
+        // tid = idCtrl.postId(tid);
+        // return ("Id registered.");
+        return null;
     }
 
     public List<Message> getMessages() {
