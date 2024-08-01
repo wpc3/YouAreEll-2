@@ -14,7 +14,7 @@ package models;
 *
  */
 public class Message implements Comparable<Message> {
-
+    // sample from server
     // {"sequence":"ea9ccec875bbbbdcca464eb59718ae7cba9def95","timestamp":"2023-08-06T18:45:21.083445025Z",
     // "fromid":"xt0fer","toid":"torvalds","message":"Can you hear me now?!"}
     private String message = "";
