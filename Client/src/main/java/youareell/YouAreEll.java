@@ -3,8 +3,7 @@ package youareell;
 import controllers.*;
 
 public class YouAreEll {
-
-    TransactionController tt;
+    private TransactionController tt;
 
     public YouAreEll (TransactionController t) {
         this.tt = t;
@@ -16,16 +15,14 @@ public class YouAreEll {
             new TransactionController(
                 new MessageController(), new IdController()
         ));
-        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String get_ids() {
-        return tt.makecall("/ids", "GET", "");
+        return "Not Implemented";
     }
 
     public String get_messages() {
-        return MakeURLCall("/messages", "GET", "");
+        return "Not Implemented";
     }
 
 

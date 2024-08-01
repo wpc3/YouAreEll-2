@@ -1,4 +1,4 @@
-package views;
+package youareell;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.util.List;
 
 import controllers.IdController;
 import controllers.MessageController;
-import youareell.YouAreEll;
+import controllers.TransactionController;
 
-// Simple Shell is a Console view for youareell.YouAreEll.
-public class SimpleShell {
+// URLShell is a Console view for youareell.YouAreEll.
+public class URLShell {
 
 
     public static void prettyPrint(String output) {
@@ -20,8 +20,11 @@ public class SimpleShell {
         System.out.println(output);
     }
     public static void main(String[] args) throws java.io.IOException {
+        new URLShell().run();
+    }
 
-        YouAreEll urll = new YouAreEll(new MessageController(), new IdController());
+    public void run() throws IOException {
+        YouAreEll urll = new YouAreEll(new TransactionController(new MessageController(), new IdController()));
         
         String commandLine;
         BufferedReader console = new BufferedReader
@@ -44,7 +47,7 @@ public class SimpleShell {
             if (commandLine.equals(""))
                 continue;
             if (commandLine.equals("exit")) {
-                System.out.println("bye!");
+                System.out.println("\n*** Bye!\n");
                 break;
             }
 
@@ -54,8 +57,8 @@ public class SimpleShell {
                 list.add(commands[i]);
 
             }
-            System.out.print(list); //***check to see if list was added correctly***
-            history.addAll(list);
+            //System.out.print(list); //***check to see if list was added correctly***
+            history.add(commandLine);
             try {
                 //display history of shell with index
                 if (list.get(list.size() - 1).equals("history")) {
@@ -67,16 +70,16 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-                if (list.contains("ids")) {
-                    String results = webber.get_ids();
-                    SimpleShell.prettyPrint(results);
+                if (list.get(0).contains("ids")) {
+                    String results = urll.get_ids();
+                    URLShell.prettyPrint(results);
                     continue;
                 }
 
                 // messages
-                if (list.contains("messages")) {
-                    String results = webber.get_messages();
-                    SimpleShell.prettyPrint(results);
+                if (list.get(0).contains("messages")) {
+                    String results = urll.get_messages();
+                    URLShell.prettyPrint(results);
                     continue;
                 }
                 // you need to add a bunch more.
@@ -86,6 +89,7 @@ public class SimpleShell {
                     pb.command(history.get(history.size() - 2));
 
                 }//!<integer value i> command
+                // there is BUG in this code, can you find it?
                 else if (list.get(list.size() - 1).charAt(0) == '!') {
                     int b = Character.getNumericValue(list.get(list.size() - 1).charAt(1));
                     if (b <= history.size())//check if integer entered isn't bigger than history size
@@ -109,12 +113,14 @@ public class SimpleShell {
                 // br.close();
 
 
+            } finally {
+                // System.out.println("Input Error, Please try again!");
             }
 
             //catch ioexception, output appropriate message, resume waiting for input
-            catch (IOException e) {
-                System.out.println("Input Error, Please try again!");
-            }
+            // catch (IOException e) {
+            //     System.out.println("Input Error, Please try again!");
+            // }
             // So what, do you suppose, is the meaning of this comment?
             /** The steps are:
              * 1. parse the input to obtain the command and any parameters
