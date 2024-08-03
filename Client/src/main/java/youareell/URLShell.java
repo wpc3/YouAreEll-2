@@ -11,6 +11,7 @@ import controllers.IdController;
 import controllers.MessageController;
 import controllers.ServerController;
 import controllers.TransactionController;
+import models.Id;
 
 // URLShell is a Console view for youareell.YouAreEll.
 public class URLShell {
@@ -84,12 +85,38 @@ public class URLShell {
                     URLShell.prettyPrint(results);
                     continue;
                 }
-                // you need to add a bunch more.
-                if (list.get(0).contains("postID") && list.size() ==3){
-                    String githubID = list.get(1);
-                    String name = list.get(2);
-//                    String results = urll.p
+
+                String command = list.get(0);
+
+                switch (command) {
+//                    case "ids":
+//                        prettyPrint(urll.get_ids());
+//                        break;
+//                    case "messages":
+//                        prettyPrint(urll.get_messages());
+//                        break;
+                    case "POST":
+                        handlePostID(list, urll);
+                        break;
+                    case "DELETE":
+                        handleDeletetID(list, urll);
+                        break;
+                    case "PUT":
+                        handlePutID(list, urll);
+                        break;
                 }
+
+                // you need to add a bunch more.
+
+                //post ids
+//                if (list.get(0).contains("POST") ){
+//                    String pid = list.get(1);
+//                    String github = list.get(2);
+//                    String name = list.get(3);
+//                    String results = urll.post_Id(pid);
+//                    URLShell.prettyPrint(results);
+//                    continue;
+//                }
 
                 //!! command returns the last command in history
                 if (list.get(list.size() - 1).equals("!!")) {
@@ -105,29 +132,31 @@ public class URLShell {
                     pb.command(list);
                 }
 
-                // // wait, wait, what curiousness is this?
-                // Process process = pb.start();
 
-                // //obtain the input stream
-                // InputStream is = process.getInputStream();
-                // InputStreamReader isr = new InputStreamReader(is);
-                // BufferedReader br = new BufferedReader(isr);
 
-                // //read output of the process
-                // String line;
-                // while ((line = br.readLine()) != null)
-                //     System.out.println(line);
-                // br.close();
+//                // // wait, wait, what curiousness is this?
+//                 Process process = pb.start();
+//
+//                // //obtain the input stream
+//                 InputStream is = process.getInputStream();
+//                 InputStreamReader isr = new InputStreamReader(is);
+//                 BufferedReader br = new BufferedReader(isr);
+//
+//                // //read output of the process
+//                 String line;
+//                 while ((line = br.readLine()) != null)
+//                     System.out.println(line);
+//                 br.close();
 
 
             } finally {
-                // System.out.println("Input Error, Please try again!");
+//                 System.out.println("Input Error, Please try again!");
             }
 
-            //catch ioexception, output appropriate message, resume waiting for input
-            // catch (IOException e) {
-            //     System.out.println("Input Error, Please try again!");
-            // }
+//            catch ioexception, output appropriate message, resume waiting for input
+//             catch (IOException e) {
+//                 System.out.println("Input Error, Please try again!");
+//             }
             // So what, do you suppose, is the meaning of this comment?
             /** The steps are:
              * 1. parse the input to obtain the command and any parameters
@@ -140,6 +169,43 @@ public class URLShell {
         }
 
 
+    }
+    private void handlePostID(List<String> list, YouAreEll urll){
+        if(list.size() < 4){
+            System.out.println("POST: id, githubName, name");
+            return;
+        }
+        String id = list.get(1);
+        String githubName = list.get(2);
+        String name = list.get(3);
+
+        Id newID = new Id(id,githubName,name);
+        String result = urll.post_Id(newID);
+        prettyPrint(result != null ? "ID posted: " + result : "Failed to post ID");
+    }
+    private void handlePutID(List<String> list, YouAreEll urll){
+        if(list.size() < 4){
+            System.out.println("PUT: id, githubName, name");
+            return;
+        }
+        String id = list.get(1);
+        String githubName = list.get(2);
+        String name = list.get(3);
+
+        Id newID = new Id(id,githubName,name);
+        String result = urll.put_Id(newID);
+        prettyPrint(result != null ? "ID updated: " + result : "Failed to update ID");
+    }
+
+    private void handleDeletetID(List<String> list, YouAreEll urll) {
+    if(list.size() < 2){
+        System.out.println("DELETE id");
+        return;
+    }
+
+    String id = list.get(1);
+    String success =urll.delete_Id(id);
+        System.out.println(success != null ? "ID deleted" : "Failed to delete id.");
     }
 
 }

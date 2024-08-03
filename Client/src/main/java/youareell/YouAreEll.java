@@ -53,12 +53,16 @@ public class YouAreEll {
 
 
     public String put_Id(Id id){
-        String postId = tt.postId(id);
+        String puttId = tt.putId(id);
 
-        return postId != null ? postId : "Failed to register ID. \n";
+        return puttId != null ? puttId : "Failed to register ID. \n";
     }
 
+    public String delete_Id(String id){
+        String deleteId = tt.deleteId(id);
 
+        return deleteId != null ? deleteId : "Failed to delete ID. \n";
+    }
 
 
 }

@@ -41,7 +41,7 @@ public class ServerController {
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
             
 
-            if (method.equals("POST")) {
+            if (method.equals("POST") || method.equals("PUT")) {
                 // Send POST request using the body parameter
                 con.setDoOutput(true);
                 DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -79,6 +79,22 @@ public class ServerController {
     
     public String getIds() {
         return sendRequest("/ids", "GET", "");
+    }
+
+    public String getId(){
+        return sendRequest("/ids", "GET", "");
+    }
+
+    public String putId(){
+    return sendRequest("/ids", "PUT", "" );
+    }
+
+    public String postId(){
+    return sendRequest("/ids", "POST", "");
+    }
+
+    public String deleteId(){
+    return sendRequest("/ids","DELETE", "");
     }
 
     public static void main(String[] args) {
