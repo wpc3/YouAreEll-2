@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Id;
 
 public class IdController {
+
+        private static final String BASE_URL =  "http://zipcode.rocks:8085/ids";
+
     ServerController sc;
     private HashMap<String, Id> allIds;
 
@@ -44,6 +47,13 @@ public class IdController {
         // create json from id
         // call server, get json result Or error
         // result json to Id obj
+        try{
+            //Conver ID object to JSON
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonInput = mapper.writeValueAsString(id);
+        }catch (Exception e){
+            System.out.println("Error posting Id: " + e.getMessage());
+        }
 
         return null;
     }

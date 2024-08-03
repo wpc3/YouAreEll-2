@@ -38,7 +38,7 @@ public class URLShell {
         //we break out with <ctrl c>
         while (true) {
             //read what the user enters
-            System.out.println("cmd? ");
+            System.out.println("enter a command ");
             commandLine = console.readLine();
 
             //input parsed into array of strings(command and arguments)
@@ -85,6 +85,11 @@ public class URLShell {
                     continue;
                 }
                 // you need to add a bunch more.
+                if (list.get(0).contains("postID") && list.size() ==3){
+                    String githubID = list.get(1);
+                    String name = list.get(2);
+//                    String results = post
+                }
 
                 //!! command returns the last command in history
                 if (list.get(list.size() - 1).equals("!!")) {
