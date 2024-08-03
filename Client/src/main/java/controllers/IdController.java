@@ -1,5 +1,10 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +17,7 @@ import models.Id;
 
 public class IdController {
 
-        private static final String BASE_URL =  "http://zipcode.rocks:8085/ids";
+        private String rootURL =  "http://zipcode.rocks:8085/ids";
 
     ServerController sc;
     private HashMap<String, Id> allIds;
@@ -48,9 +53,33 @@ public class IdController {
         // call server, get json result Or error
         // result json to Id obj
         try{
-            //Conver ID object to JSON
+            //Convert ID object to JSON
             ObjectMapper mapper = new ObjectMapper();
             String jsonInput = mapper.writeValueAsString(id);
+
+            //Send POST request
+            URL url = new URL(rootURL + "/" + id.getGithub());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInput.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            //Read responses
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null){
+                    sb.append(line);
+                }
+                return mapper.readValue(sb.toString(),Id.class);
+            }
+
         }catch (Exception e){
             System.out.println("Error posting Id: " + e.getMessage());
         }
@@ -59,7 +88,41 @@ public class IdController {
     }
 
     public Id putId(Id id) {
+
+        try{
+            //Convert ID object to JSON
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonInput = mapper.writeValueAsString(id);
+
+            //Send PUT request
+            URL url = new URL(rootURL + "/" + id.getGithub());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInput.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            //Read responses
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null){
+                    sb.append(line);
+                }
+                return mapper.readValue(sb.toString(),Id.class);
+            }
+
+        }catch (Exception e){
+            System.out.println("Error putting Id: " + e.getMessage());
+        }
+
         return null;
+
     }
  
 }

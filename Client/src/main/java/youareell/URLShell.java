@@ -88,7 +88,7 @@ public class URLShell {
                 if (list.get(0).contains("postID") && list.size() ==3){
                     String githubID = list.get(1);
                     String name = list.get(2);
-//                    String results = post
+//                    String results = urll.p
                 }
 
                 //!! command returns the last command in history
