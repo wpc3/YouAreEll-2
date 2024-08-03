@@ -20,24 +20,42 @@ public class TransactionController {
     }
 
     public String getId(String id) {
-        return null;
+        Id getID = idCtrl.getId(id);
+        if(getID != null){
+            return id;
+        }
+
+        return "Failed to get id";
     }
-    public String putId(String id) {
-        return null;
+    public String putId(Id id) {
+        Id updatedID = idCtrl.putId(id);
+
+        if(updatedID != null){
+            return "id updated successfully" ;
+        }
+        return "Failed to update id";
     }
 
     public String deleteId(String id) {
-        return null;
+
+        return idCtrl.deleteID(id);
     }
 
-    public String postId(String idtoRegister, String githubName) {
-        // Id tid = new Id(idtoRegister, githubName);
-        // tid = idCtrl.postId(tid);
-        // return ("Id registered.");
-        return null;
+    public String postId(Id id) {
+//         Id tid = new Id(idtoRegister, githubName);
+//         tid = idCtrl.postId(tid);
+//         return ("Id registered.");
+        Id postedID = idCtrl.postId(id);
+        if(postedID != null){
+            return "Id registeted";
+        }
+
+        return "Failed to register id.";
     }
 
     public List<Message> getMessages() {
         return msgCtrl.getMessages();
     }
+
+
 }

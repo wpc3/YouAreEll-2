@@ -2,9 +2,8 @@ package youareell;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
 import controllers.*;
+import models.Id;
 
 public class YouAreEll {
     private TransactionController tt;
@@ -38,6 +37,25 @@ public class YouAreEll {
             sb.append(msg.toString()+"\n");
         }
         return sb.toString();
+    }
+
+    public String get_Id(String gitHubId){
+        String id = tt.getId(gitHubId);
+
+        return id != null ? id : "ID not found. \n";
+    }
+
+    public String post_Id(Id id){
+        String postId = tt.postId(id);
+
+        return postId != null ? postId : "Failed to register ID. \n";
+    }
+
+
+    public String put_Id(Id id){
+        String postId = tt.postId(id);
+
+        return postId != null ? postId : "Failed to register ID. \n";
     }
 
 

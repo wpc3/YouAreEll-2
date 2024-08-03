@@ -124,5 +124,65 @@ public class IdController {
         return null;
 
     }
+
+    public Id getId (String gitHubId){
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+
+            //Send GET request
+            URL url = new URL(rootURL + "/" + gitHubId);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+
+            //Read responses
+             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null){
+                    sb.append(line);
+                }
+                br.close();
+                return mapper.readValue(sb.toString(),Id.class);
+            }
+
+        catch (Exception e){
+            System.out.println("Error getting Id: " + e.getMessage());
+        }
+
+        return null;
+
+
+    }
+
+    public String deleteID(String gitHubId){
+
+        try{
+
+            //Send DELETE request
+            URL url = new URL(rootURL + "/" + gitHubId);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+
+
+            //Check response code
+            int responseCode = conn.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                return "ID deleted successfully";
+            }
+            else {
+                return "Failed to delete ID: " + responseCode;
+            }
+        }
+
+        catch (Exception e){
+            System.out.println("Error deleting Id: " + e.getMessage());
+        }
+
+        return null;
+
+
+
+    }
  
 }
