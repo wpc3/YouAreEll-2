@@ -19,13 +19,8 @@ public class TransactionController {
         return idCtrl.getIds();
     }
 
-    public String getId(String id) {
-        Id getID = idCtrl.getId(id);
-        if(getID != null){
-            return id;
-        }
-
-        return "Failed to get id";
+    public Id getId(String id) {
+        return idCtrl.getId(id);
     }
     public String putId(Id id) {
         Id updatedID = idCtrl.putId(id);

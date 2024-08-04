@@ -12,6 +12,7 @@ import models.Id;
 import models.Message;
 
 public class MessageController {
+    private String rootURL =  "http://zipcode.rocks:8085/messages";
     ServerController sc;
 
     private HashSet<Message> messagesSeen;
@@ -41,7 +42,7 @@ public class MessageController {
     }
     public ArrayList<Message> getMessagesForId(Id Id) {
 
-        String jsonInput = sc.getMessages();
+        String jsonInput = sc.getId();
         // convert json to array of Ids
         ObjectMapper mapper = new ObjectMapper();
         List<Message> msgs;

@@ -39,10 +39,9 @@ public class YouAreEll {
         return sb.toString();
     }
 
-    public String get_Id(String gitHubId){
-        String id = tt.getId(gitHubId);
+    public Id get_Id(String id){
 
-        return id != null ? id : "ID not found. \n";
+        return tt.getId(id);
     }
 
     public String post_Id(Id id){

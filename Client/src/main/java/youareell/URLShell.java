@@ -104,6 +104,8 @@ public class URLShell {
                     case "PUT":
                         handlePutID(list, urll);
                         break;
+                    case "GET":
+                        handleGetID(list,urll);
                 }
 
                 // you need to add a bunch more.
@@ -181,7 +183,7 @@ public class URLShell {
 
         Id newID = new Id(id,githubName,name);
         String result = urll.post_Id(newID);
-        prettyPrint(result != null ? "ID posted: " + result : "Failed to post ID");
+        prettyPrint(result != null ?  result : "Failed to post ID");
     }
     private void handlePutID(List<String> list, YouAreEll urll){
         if(list.size() < 4){
@@ -194,7 +196,7 @@ public class URLShell {
 
         Id newID = new Id(id,githubName,name);
         String result = urll.put_Id(newID);
-        prettyPrint(result != null ? "ID updated: " + result : "Failed to update ID");
+        prettyPrint(result != null ?  result : "Failed to update ID");
     }
 
     private void handleDeletetID(List<String> list, YouAreEll urll) {
@@ -207,5 +209,18 @@ public class URLShell {
     String success =urll.delete_Id(id);
         System.out.println(success != null ? "ID deleted" : "Failed to delete id.");
     }
+
+    private void handleGetID(List<String> list, YouAreEll urll) {
+        if(list.size() < 2){
+            System.out.println("GET id");
+            return;
+        }
+
+        String id = list.get(1);
+        Id success =urll.get_Id(id);
+        prettyPrint(success != null ? String.valueOf(success) : "Failed to get id.");
+    }
+
+
 
 }
