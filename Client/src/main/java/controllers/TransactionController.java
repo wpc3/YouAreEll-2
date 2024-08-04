@@ -1,8 +1,10 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import models.Id;
 import models.Message;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TransactionController {
@@ -58,6 +60,20 @@ public class TransactionController {
         }
         return msgCtrl.getMessagesForId(id);
     }
+
+    public String postMessage(String myId, String toId, String msg) throws IOException {
+//         Message message = new Message(msg,myId,toId);
+         msgCtrl.postMessage(myId,toId,msg);
+
+         return "Message posted";
+    }
+
+    public Message getMessageFromSeq(String seq){
+
+        return msgCtrl.getMessageForSequence(seq);
+    }
+
+
 
 
 }

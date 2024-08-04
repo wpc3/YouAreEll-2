@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import controllers.IdController;
 import controllers.MessageController;
 import controllers.ServerController;
@@ -97,7 +98,8 @@ public class URLShell {
 //                        prettyPrint(urll.get_messages());
 //                        break;
                     case "POST":
-                        handlePostID(list, urll);
+//                        handlePostID(list, urll);
+                        handlePostMessage(list,urll);
                         break;
                     case "DELETE":
                         handleDeletetID(list, urll);
@@ -110,6 +112,10 @@ public class URLShell {
                         break;
                     case "GET":
                         handleMessagesForID(list,urll);
+                        break;
+                    case "POSTM":
+                        handlePostMessage(list,urll);
+
 
                 }
 
@@ -177,6 +183,15 @@ public class URLShell {
 
 
     }
+
+    private void handleGetCommand(List<String> list, YouAreEll urll){
+        if(list.size() <2){
+            System.out.println("enter case for ids or messages");
+           return;
+        }
+
+    }
+
     private void handlePostID(List<String> list, YouAreEll urll){
         if(list.size() < 4){
             System.out.println("POST: id, githubName, name");
@@ -241,6 +256,21 @@ public class URLShell {
 
 
         String msg = urll.get_Messages_For_ID(id);
+        prettyPrint(msg);
+    }
+    private void handlePostMessage(List<String> list, YouAreEll urll) throws IOException {
+        if(list.size() == 3){
+            System.out.println("Posting Message");
+            return;
+        }
+
+        String idFrom = list.get(1);
+        String idTo = list.get(2);
+        String message = list.get(3);
+
+        System.out.println(idFrom +idTo + message);
+
+        String msg = urll.post_Message(idFrom,idTo,message);
         prettyPrint(msg);
     }
 

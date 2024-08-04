@@ -106,6 +106,9 @@ public class ServerController {
 
     }
 
+    public void sendMessage(String myId, String toId, String msg) {
+        sendRequest("/ids/" + myId + "/messages", "POST", msg);
+    }
 }
 
 // ServerController.shared.doGet()

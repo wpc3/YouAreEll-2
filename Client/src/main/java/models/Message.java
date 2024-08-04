@@ -1,6 +1,8 @@
 package models;
 
-/* 
+import java.time.OffsetDateTime;
+
+/*
  * POJO for an Message object
  *
  *   {
@@ -37,6 +39,8 @@ public class Message implements Comparable<Message> {
         this.message = message;
         this.fromid = fromId;
         this.toid = toId;
+
+        this.timestamp = OffsetDateTime.now().toString();
     }
 
     public Message (String message, String fromId) {
@@ -44,6 +48,12 @@ public class Message implements Comparable<Message> {
         this.fromid = fromId;
         this.toid = "";
     }
+
+//    public Message(String myId, String toId, String msg) {
+//        this.fromid = myId;
+//        this.toid = toId;
+//        this.message = msg;
+//    }
 
     @Override
     public String toString() {

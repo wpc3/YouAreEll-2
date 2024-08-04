@@ -1,7 +1,9 @@
 package youareell;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import controllers.*;
 import models.Id;
 
@@ -73,6 +75,16 @@ public class YouAreEll {
             sb.append(msg.toString()+"\n");
         }
         return sb.toString();
+    }
+    public String post_Message(String from,String to, String body) throws IOException {
+        String post = tt.postMessage(to,from,body);
+        return post;
+    }
+
+    public String get_Message_From_Seq(String seq){
+
+        return seq;
+
     }
 
 
