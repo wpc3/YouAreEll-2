@@ -63,5 +63,17 @@ public class YouAreEll {
         return deleteId != null ? deleteId : "Failed to delete ID. \n";
     }
 
+    public String get_Messages_For_ID(String id){
+        List<models.Message> latestMessages = tt.getMessagesForID(id);
+        if(latestMessages == null){
+            return "No messages found for the given ID. \n";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (models.Message msg : latestMessages) {
+            sb.append(msg.toString()+"\n");
+        }
+        return sb.toString();
+    }
+
 
 }

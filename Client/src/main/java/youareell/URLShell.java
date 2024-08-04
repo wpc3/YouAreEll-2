@@ -12,6 +12,7 @@ import controllers.MessageController;
 import controllers.ServerController;
 import controllers.TransactionController;
 import models.Id;
+import models.Message;
 
 // URLShell is a Console view for youareell.YouAreEll.
 public class URLShell {
@@ -104,8 +105,12 @@ public class URLShell {
                     case "PUT":
                         handlePutID(list, urll);
                         break;
-                    case "GET":
+                    case "GET1":
                         handleGetID(list,urll);
+                        break;
+                    case "GET":
+                        handleMessagesForID(list,urll);
+
                 }
 
                 // you need to add a bunch more.
@@ -218,7 +223,25 @@ public class URLShell {
 
         String id = list.get(1);
         Id success =urll.get_Id(id);
+        System.out.println("ID: " + id);
         prettyPrint(success != null ? String.valueOf(success) : "Failed to get id.");
+    }
+
+    private void handleMessagesForID(List<String> list, YouAreEll urll){
+
+
+        if(list.size() < 4){
+            System.out.println("GET Messages From id");
+            return;
+        }
+
+        String id = list.get(2);
+
+
+
+
+        String msg = urll.get_Messages_For_ID(id);
+        prettyPrint(msg);
     }
 
 

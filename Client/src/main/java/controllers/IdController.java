@@ -169,21 +169,24 @@ public class IdController {
     public Id getId (String id){
         // convert json to array of Ids
         ObjectMapper mapper = new ObjectMapper();
+        String jsonInput = sc.getIds();
 
-
+        List<Id> newID;
         try {
-//            id = mapper.readValue(jsonInput, mapper.getTypeFactory().constructCollectionType(List.class, Id.class));
-            //Convert ID to JSON
-//            String jsonInput = gitHubId;
+            newID = mapper.readValue(jsonInput, mapper.getTypeFactory().constructCollectionType(List.class, Id.class));
 
-            //Send POST request
+//            id = mapper.readValue(jsonInput, mapper.getTypeFactory().constructCollectionType(List.class, Id.class));
+//            //Convert ID to JSON
+//            String jsonInput = id;
+//
+//            //Send POST request
 //            String jsonResponse = sc.sendRequest("/ids", "GET", jsonInput);
 //            System.out.println();
-            return getIds().stream().filter(x->x.getUserid().equals(id)).findFirst().orElse(null);
+            return newID.stream().filter(x->x.getUserid().equals(id)).findFirst().orElse(null);
 
         }
         catch (Exception e) {
-            System.out.println("Faied to get ID " + e.getMessage());
+            System.out.println("Failed to get ID " + e.getMessage());
         }
         return null;
 //        ObjectMapper mapper = new ObjectMapper();

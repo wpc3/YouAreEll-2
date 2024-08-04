@@ -51,6 +51,13 @@ public class TransactionController {
     public List<Message> getMessages() {
         return msgCtrl.getMessages();
     }
+    public List<Message> getMessagesForID(String id){
+        if(msgCtrl.getMessagesForId(id) == null){
+            System.out.println("No messages available");
+            return null;
+        }
+        return msgCtrl.getMessagesForId(id);
+    }
 
 
 }

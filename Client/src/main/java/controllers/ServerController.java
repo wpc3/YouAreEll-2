@@ -27,7 +27,7 @@ public class ServerController {
     /**
      * Sends a GET or POST request to the specified URL.
      *
-     * @param url      The URL to send the request to
+     * @param resource      The URL to send the request to
      * @param method   Either "GET" or "POST"
      * @param body     The body of the request, if any
      * @return         A string containing the response from the server
@@ -94,7 +94,7 @@ public class ServerController {
     }
 
     public String deleteId(){
-    return sendRequest("/ids","DELETE", "");
+    return sendRequest("/ids", "DELETE", "");
     }
 
     public static void main(String[] args) {
